@@ -1,6 +1,6 @@
 from random import randint, choice as rc
 from faker import Faker
-from index import app
+from app import app
 from database import db
 from models import User
 
