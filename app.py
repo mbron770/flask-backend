@@ -87,6 +87,6 @@ def webhook_handler():
     
 
 
-    if __name__ == '__main__':
-        app.run(port=6000)
+    # if __name__ == '__main__':
+    #     app.run(port=6000)
 
