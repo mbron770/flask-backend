@@ -40,8 +40,8 @@ def webhook_handler():
     if request.method != 'POST': return ('Method Not Allowed', 405)
     # return jsonify('hhwewqwwqwq'),200
     
-    payload = request.json
-    headers = request.headers
+    # payload = request.json
+    # headers = request.headers
     clerk_secret = 'whsec_l47H70e5eo5F3Uvv4vlVRgMaYITINbdK'
     
     # heads = {
