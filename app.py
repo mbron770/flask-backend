@@ -35,9 +35,10 @@ def test():
             users.append(str(user))
         return jsonify(users), 200
     
-@app.route('/clerk_webhook', methods = ['GET','POST'])
+@app.route('/clerk_webhook', methods = ['POST'])
 def webhook_handler():
     if request.method != 'POST': return ('Method Not Allowed', 405)
+    # return jsonify('hhwewqwwqwq'),200
     
     payload = request.json
     headers = request.headers
