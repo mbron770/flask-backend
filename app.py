@@ -50,7 +50,7 @@ def add_user():
     
 @app.route('/update_user/<string:clerkID>', methods = ['PATCH'])
 def update_user(clerkID):
-    user = User.query.filter(User.clerkID).first()
+    user = User.query.filter_by(clerkID == clerkID).first()
     if not user: return {'error' : 'user not found'}, 404
     data = request.json
     try:
