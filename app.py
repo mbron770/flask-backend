@@ -64,7 +64,7 @@ def update_user(clerkID):
     
 @app.route('/delete_user/<string:deletedUserClerkID>', methods = ['DELETE'])
 def delete_user(deletedUserClerkID):
-    user = User.query.filter_by(deletedUserClerkID=clerkID).first() 
+    user = User.query.filter_by(clerkID=deletedUserClerkID).first() 
     if not user: return {'error' : 'user not found'}, 404
     try:
         db.session.delete(user)
