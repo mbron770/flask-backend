@@ -62,7 +62,7 @@ def update_user(clerkID):
     except ValueError as ie: 
         return {'error': ie.args}, 422
     
-@app.route('/delete_user/<string:deletedUserClerkID', methods = ['DELETE'])
+@app.route('/delete_user/<string:deletedUserClerkID>', methods = ['DELETE'])
 def delete_user(deletedUserClerkID):
     user = User.query.filter_by(deletedUserClerkID=clerkID).first() 
     if not user: return {'error' : 'user not found'}, 404
