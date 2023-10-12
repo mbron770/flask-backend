@@ -9,7 +9,7 @@ fake = Faker()
 def create_users():
     users = []
     for _ in range(10):
-        u = User(name = fake.name(), age = rc(range(1,100)))
+        u = User(name = fake.name(), username = fake.name(), clerkID = fake.name())
         users.append(u)
     return users 
 

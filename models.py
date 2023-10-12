@@ -23,8 +23,9 @@ class User(db.Model, SerializerMixin):
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    age = db.Column(db.Integer)
+    username = db.Column(db.String)
+    clerkID = db.Column(db.String)
     
     def __repr__(self):
-        return f'<Camper {self.id}: {self.name}>'
+        return f'id: {self.id} name: {self.name} username: {self.username} clerkID: {self.clerkID}'
     
