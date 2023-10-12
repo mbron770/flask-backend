@@ -48,6 +48,23 @@ def add_user():
     except ValueError as ie:
         return {'error': ie.args}, 422
     
+@app.route('/update_user/<string:clerkID>', methods = ['PATCH'])
+def update_user(clerkID):
+    user = User.query.filer(User.clerkID).first()
+    if not user: return {'error' : 'user not found'}, 404
+    data = request.json
+    try:
+        for attr in data:
+            setattr(user, attr, data[attr])
+        db.session.add(user)
+        db.session.commit()
+        return jsonify(user.to_dict()), 201
+    except ValueError as ie: 
+        return {'error': ie.args}, 422
+    
+    
+    
+    
     
     
     
