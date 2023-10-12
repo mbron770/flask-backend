@@ -44,7 +44,7 @@ def add_user():
             setattr(user, attr, data[attr])
         db.session.add(user)
         db.session.commit()
-        return jsonify(user), 201
+        return jsonify(user.to_dict()), 201
     except ValueError as ie:
         return {'error': ie.args}, 422
     
