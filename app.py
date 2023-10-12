@@ -37,7 +37,7 @@ def test():
 
 @app.route('/add_user', methods = ['POST'])
 def add_user():
-    data = request.json()
+    data = request.json
     user = User()
     try:
         for attr in data:
