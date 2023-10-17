@@ -7,6 +7,7 @@ from flask_cors import CORS
 from models import User
 from svix import Webhook
 import os
+from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 CORS(app)
@@ -21,6 +22,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 migrate = Migrate(app, db)
 db.init_app(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 @app.route("/")
 def hello_world():
@@ -75,22 +77,17 @@ def delete_user(deletedUserClerkID):
         return {'error': ie.args}, 422
     
     
+@socketio.on('send_message')
+def send_message(data):
+    message = {
+        'user': data['user'], 
+        'text': data['text'],
+    }
+    messages.append(message)
+    emit('got message', message, broadcast=True)
     
     
-    
-    
-    
-    
-    
-    
-
-        
-    
-    
-    
-    
-    
-
 if __name__ == '__main__':
-    app.run(port=6000)
+    # app.run(port=6000)
+    socketio.run(app, port=10000, debug=True)
 
