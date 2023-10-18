@@ -7,7 +7,7 @@ from flask_cors import CORS
 from models import User
 from svix import Webhook
 import os
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, send
 
 app = Flask(__name__)
 CORS(app)
@@ -78,13 +78,16 @@ def delete_user(deletedUserClerkID):
     
     
 @socketio.on('send_message')
-def send_message(data):
-    message = {
-        'user': data['user'], 
-        'text': data['text'],
-    }
-    messages.append(message)
+def send_message(message):
+    send(message)
+    print(message)
+    # message = {
+    #     'user': data['user'], 
+    #     'text': data['text'],
+    # }
+    # messages.append(message)
     emit('got message', message, broadcast=True)
+
     
     
 if __name__ == '__main__':
