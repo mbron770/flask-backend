@@ -28,7 +28,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route('/test',  methods = ['GET', 'PATCH'])
+@app.route('/display_all_users',  methods = ['GET', 'PATCH'])
 def test():
     if(request.method == 'GET'):
         all = User.query.all()
@@ -75,7 +75,6 @@ def delete_user(deletedUserClerkID):
         return {}, 201
     except ValueError as ie:
         return {'error': ie.args}, 422
-    
     
 @socketio.on('send_message')
 def send_message(message):
