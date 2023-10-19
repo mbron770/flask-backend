@@ -26,6 +26,16 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String)
     clerkID = db.Column(db.String)
     
-    def __repr__(self):
-        return f'id: {self.id} name: {self.name} username: {self.username} clerkID: {self.clerkID}'
+    # def to_dict(self):
+    #     return {
+    #     'id': self.id,
+    #     'name': self.name,
+    #     'username': self.username,
+    #     'clerkID': self.clerkID
+    # }
+    
+    
+    
+    # def __repr__(self):
+    #     return f'id: {self.id} name: {self.name} username: {self.username} clerkID: {self.clerkID}'
     
