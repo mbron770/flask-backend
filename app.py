@@ -49,7 +49,8 @@ def display_all_users():
     #     # users[user.name] = str(user)
     #     # users[user.username] = str(user)
     #     users[user.id] = str(user)
-    return jsonify(users), 200
+    # return jsonify(users rules = ('-user.messages_received', '-messages_sent')), 200
+    return jsonify({'users': users}), 200, {'X-Excluded-Fields': 'user.messages_received, messages_sent'}
 
 
 # @app.route('/add_message_to_db', methods=['POST'])
@@ -86,7 +87,8 @@ def add_message_to_db():
 
 @app.route('/add_user', methods=['POST'])
 def add_user():
-    data = request.json()
+    data = request.json
+    # data = request.get_json()
     user = User()
     try:
         for attr in data:
