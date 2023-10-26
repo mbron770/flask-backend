@@ -24,18 +24,29 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     username = db.Column(db.String)
-    clerkID = db.Column(db.String)
+    clerkID = db.Column(db.String, unique=True)
     
-    # def to_dict(self):
-    #     return {
-    #     'id': self.id,
-    #     'name': self.name,
-    #     'username': self.username,
-    #     'clerkID': self.clerkID
-    # }
+    messages_sent = db.relationship(
+        'Message', primaryjoin="User.clerkID == foreign(Message.sender)", back_populates='message_sender'
+    )
+
+    messages_received = db.relationship(
+        'Message', primaryjoin="User.clerkID == foreign(Message.recipient)", back_populates='message_recipient'
+    )
     
+    serialize_rules = ('messages_sent', 'messages_received',)
+
+class Message(db.Model, SerializerMixin): 
+    __tablename__ = 'messages' 
     
+    id = db.Column(db.Integer, primary_key=True)
+    sender = db.Column(db.String, db.ForeignKey('users.clerkID'))
+    recipient = db.Column(db.String, db.ForeignKey('users.clerkID'))
+    dateTime = db.Column(db.Date)
+    content = db.Column(db.String)
     
-    # def __repr__(self):
-    #     return f'id: {self.id} name: {self.name} username: {self.username} clerkID: {self.clerkID}'
+    message_sender = db.relationship('User', foreign_keys=[sender], back_populates='messages_sent')
+    message_recipient = db.relationship('User', foreign_keys=[recipient], back_populates='messages_received')
+
     
+    # serialize_rules = ('message_sender','message_recipient',)
