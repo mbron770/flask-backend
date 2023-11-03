@@ -41,16 +41,17 @@ def hello_world():
 
 @app.route('/display_all_users')
 def display_all_users():
-    # if(request.method == 'GET'):
-    all = User.query.all()
-    users = [user.to_dict() for user in all]
+    if(request.method == 'GET'):
+        all = User.query.all()
+        users = [user.to_dict(rules = ('-messages_received', '-messages_sent',)) for user in all]
+        return users, 200
     # for user in all:
     #     # users[user.id] = str(user)
     #     # users[user.name] = str(user)
     #     # users[user.username] = str(user)
     #     users[user.id] = str(user)
     # return jsonify(users rules = ('-user.messages_received', '-messages_sent')), 200
-    return jsonify({'users': users}), 200, {'X-Excluded-Fields': 'user.messages_received, messages_sent'}
+    
 
 
 # @app.route('/add_message_to_db', methods=['POST'])
