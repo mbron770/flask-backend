@@ -146,4 +146,4 @@ def send_message(message):
 
 if __name__ == '__main__':
     # app.run(port=6000)
-    socketio.run(app, port=10000, debug=True)
+    socketio.run(app, port=443, debug=True)
